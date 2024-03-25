@@ -8,6 +8,6 @@ members = [
     "zeromin-common",
 
     # SDK/FFIs
-    "zeromin-sdk"
+    "zeromin"
 
 ]
