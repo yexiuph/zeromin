@@ -3,6 +3,7 @@ use std::ffi::c_char;
 // You need to have a pointer for this to store in memory in C++
 #[repr(C)]
 pub struct ZRijndael {
+    _antizero: [u8; 0], // Ensure the struct is not zero-sized and stays in the memory
     pub ran_file_version: i32,
     pub rijn_version: *const c_char,
 }
@@ -37,7 +38,7 @@ pub extern "C" fn data_free(ptr: *mut ZStruct) {
         return;
     }
     unsafe {
-        Box::from_raw(ptr);
+        let _ = Box::from_raw(ptr);
     }
 }
 

@@ -3,6 +3,7 @@ use std::os::raw::c_char;
 
 #[repr(C)]
 pub struct ZeroPath {
+    _antizero: [u8; 0],// Ensure the struct is not zero-sized and stays in the memory
     pub glogic: *const c_char,
     pub glevel: *const c_char,
     pub gnpctalk: *const c_char,
@@ -20,6 +21,7 @@ impl ZeroPath {
         let game_logic_path = "/gamelogic";
         let game_files_path = "/gamefiles";
         ZeroPath {
+            _antizero: [],
             glogic: ptr_from_string(&(base_path.to_string() + game_logic_path + "/glogic.rcc")),
             glevel: ptr_from_string(&(base_path.to_string() + game_logic_path + "/level.rcc")),
             gnpctalk: ptr_from_string(&(base_path.to_string() + game_logic_path + "/npctalk.rcc")),
@@ -38,6 +40,7 @@ fn ptr_from_string(s: &str) -> *const c_char {
 }
 
 // Function to deallocate memory of ZeroPath struct
+#[no_mangle]
 extern "C" fn zeropath_delete(zp: *mut ZeroPath) {
     unsafe {
         if !zp.is_null() {
@@ -56,6 +59,7 @@ extern "C" fn zeropath_delete(zp: *mut ZeroPath) {
 }
 
 // Function to initialize ZeroPath struct
+#[no_mangle]
 extern "C" fn zeropath_init() -> *mut ZeroPath {
     Box::into_raw(Box::new(ZeroPath::new()))
 }
