@@ -4,9 +4,6 @@ members = [
     # Test Tools
     "zeromin-test",
 
-    # Rust Lib
-    "zeromin-common",
-
     # SDK/FFIs
     "zeromin"
 

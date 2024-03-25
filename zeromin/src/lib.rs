@@ -1,8 +1,11 @@
 extern crate winapi;
+extern crate tokio;
 
 mod engine;
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
+
+use crate::engine::crypto::zerosha;
 
 #[no_mangle]
 pub async fn async_operation_callback(cha_name: String, seconds: u64) -> String {

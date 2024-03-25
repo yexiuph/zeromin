@@ -3,19 +3,15 @@ extern crate cbindgen;
 use std::env;
 
 fn main() {
-    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=src");
     println!("cargo:rustc-link-lib=d3d9");
     let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let mut config: cbindgen::Config = Default::default();
     config.language = cbindgen::Language::Cxx;
 
-    let binder = cbindgen::generate_with_config(&crate_dir, config);
-    match binder {
-        Ok(binding) => {
-            binding.write_to_file("../target/zeromin/zerominffi.h");
-        }
-        Err(_err) => {}
-    }
+    let binder = cbindgen::generate_with_config(&crate_dir, config)
+        .unwrap()
+        .write_to_file("../ffi/zerominffi.h");
 
     // let output_dir = Path::new(&crate_dir).join("../target/zeromin");
     // let target_dir = env::var("OUT_DIR").unwrap();

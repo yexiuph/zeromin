@@ -1,2 +1,2 @@
-pub mod zerosha;
 pub mod rijndael;
+pub mod zerosha;

@@ -7,6 +7,5 @@ edition = "2021"
 
 [dependencies]
 lazy_static = "*"
-tokio = { version = "1", features = ["full"] }
-zeromin-common = { path = "../zeromin-common" }
+zeromin = { path = "../zeromin" }
 imgui = "*"
