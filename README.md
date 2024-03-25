@@ -25,6 +25,23 @@ cargo build --release --target i686-pc-windows-msvc
 - The library should be under target->i686-pc-windows-msvc->zeromin.lib
 - The FFI header should be under target->zeromin->zerominffi.h
 
+### Cross refferencing auto generated headers with a manual one.
+
+Note: Only do this when you think the auto generated is not working.
+
+For C++ Output
+
+```bash
+cd zeromin && cbindgen --lang C++ -o zerominCPP.h
+```
+
+For C Output
+
+```bash
+cd zeromin && cbindgen --lang C -o zerominC.h
+```
+
+
 ## Code of Conduct
 
 **IMPORTANT** : I will not merge your works if you do not follow my rules.
