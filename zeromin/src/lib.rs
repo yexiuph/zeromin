@@ -1,6 +1,6 @@
 #![allow(unused_imports, dead_code, unused_mut)]
-extern crate winapi;
 extern crate tokio;
+extern crate winapi;
 
 mod engine;
 use std::ffi::{CStr, CString};

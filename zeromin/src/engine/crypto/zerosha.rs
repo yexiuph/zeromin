@@ -29,19 +29,20 @@ pub struct ZeroSHA {
 }
 
 impl ZeroSHA {
-    pub fn new() -> *mut ZeroSHA {
+    #[no_mangle]
+    pub extern "C" fn new() -> *mut ZeroSHA {
         let mut m_aui_buf = [0; SHA256LENGTH];
         for i in 0..SHA256LENGTH {
             m_aui_buf[i] = SM_H256[i];
         }
 
-        let mut zerosha = Box::new(ZeroSHA { 
+        let mut zerosha = Box::new(ZeroSHA {
             _antizero: [],
             m_aui_buf,
             m_aui_bits: [0; 2],
             m_auc_in: [0; BLOCKSIZE], // Assuming m_auc_in should also be initialized to zeros
         });
-        
+
         let zerosha_ptr = Box::into_raw(zerosha);
         zerosha_ptr
     }
@@ -57,10 +58,6 @@ impl Drop for ZeroSHA {
         }
     }
 }
-
-
-
-
 
 // Internal helpers
 fn circular_shift(ui_bits: u32, ui_word: u32) -> u32 {
@@ -89,7 +86,6 @@ fn sig2(x: u32) -> u32 {
 fn sig3(x: u32) -> u32 {
     ((x >> 17) | (x << 15)) ^ ((x >> 19) | (x << 13)) ^ (x >> 10)
 }
-
 
 fn bytes_to_word(pc_bytes: &[u8]) -> u32 {
     (pc_bytes[3] as u32)

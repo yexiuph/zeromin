@@ -23,7 +23,7 @@ cargo build --release --target i686-pc-windows-msvc
 ```
 
 - The library should be under target->i686-pc-windows-msvc->zeromin.lib
-- The FFI header should be under target->zeromin->zerominffi.h
+- The FFI header should be under ffi->zerominffi.h
 
 ### Cross refferencing auto generated headers with a manual one.
 

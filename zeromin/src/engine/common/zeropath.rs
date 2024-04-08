@@ -3,7 +3,7 @@ use std::os::raw::c_char;
 
 #[repr(C)]
 pub struct ZeroPath {
-    _antizero: [u8; 0],// Ensure the struct is not zero-sized and stays in the memory
+    _antizero: [u8; 0], // Ensure the struct is not zero-sized and stays in the memory
     pub glogic: *const c_char,
     pub glevel: *const c_char,
     pub gnpctalk: *const c_char,
